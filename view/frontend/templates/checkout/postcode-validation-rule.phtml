@@ -1,0 +1,27 @@
+<?php declare(strict_types=1);
+
+/** @var \Magento\Framework\Escaper $escaper */
+/** @var \Magento\Framework\View\Element\Template $block */
+
+?>
+<script>
+    (() => {
+        if (hyva && hyva.formValidation) {
+            const isValidPostcodeForNL = (postcode) => {
+                const regex = /^[1-9][0-9]{3}\s?[a-zA-Z]{2}$/;
+                return regex.test(postcode);
+            }
+
+            hyva.formValidation.addRule('postcode-nl', (value, options, field, context) => {
+                const el = field.element;
+                if (options && el.value.length && context.fields.country_id) {
+                    const country = context.fields.country_id.element.value
+                    if (country === 'NL' && ! isValidPostcodeForNL(el.value)) {
+                        return '<?= $escaper->escapeJs(__('Please enter a valid Dutch postcode. Format should be: 1234AB')) ?>';
+                    }
+                }
+                return true;
+            });
+        }
+    })()
+</script>

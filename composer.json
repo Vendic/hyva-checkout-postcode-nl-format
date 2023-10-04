@@ -1,0 +1,17 @@
+{
+    "name": "vendic/hyva-checkout-postcode-nl-format",
+    "description": "Adds a validation to the Hyvä checkout for the Dutch postcode format. Validates if the format is 1234AB",
+    "require": {
+        "php": "~8.1.0",
+        "hyva-themes/magento2-hyva-checkout": "^1.1",
+    },
+    "type": "magento2-module",
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Vendic\\HyvaCheckoutPostcodeNLFormat\\": ""
+        }
+    }
+}
