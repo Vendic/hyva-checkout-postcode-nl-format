@@ -1,16 +1,19 @@
-<?php declare(strict_types=1);
+<?php
+
 /**
  * @copyright   Copyright (c) Vendic B.V https://vendic.nl/
  */
 
+declare(strict_types=1);
+
 namespace Vendic\HyvaCheckoutPostcodeNLFormat\Model\Form;
 
-use Hyva\Checkout\Model\Form\EntityFormInterface;
-use Hyva\Checkout\Model\Form\EntityFormModifierInterface;
+use Hyva\Checkout\Model\Form\AbstractEntityForm;
+use Hyva\Checkout\Model\Form\AbstractEntityFormModifier;
 
-class AddFieldValidation implements EntityFormModifierInterface
+class AddFieldValidation extends AbstractEntityFormModifier
 {
-    public function apply(EntityFormInterface $form): EntityFormInterface
+    public function apply(AbstractEntityForm $form): AbstractEntityForm
     {
         $form->registerModificationListener(
             'addValidationToPostcode',
@@ -21,7 +24,7 @@ class AddFieldValidation implements EntityFormModifierInterface
         return $form;
     }
 
-    public function addValidationToPostcode(EntityFormInterface $entityForm) : void
+    public function addValidationToPostcode(AbstractEntityForm $entityForm): void
     {
         $postcode = $entityForm->getField('postcode');
         if (!$postcode) {
