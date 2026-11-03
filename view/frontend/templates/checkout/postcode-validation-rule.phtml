@@ -22,10 +22,12 @@ use Hyva\Theme\ViewModel\HyvaCsp;
                     const el = field.element;
                     if (options && el.value.length && context.fields.country_id) {
                         const country = context.fields.country_id.element.value
+
                         if (country === 'NL' && ! isValidPostcodeForNL(el.value)) {
                             return '<?= $escaper->escapeJs(__('Please enter a valid Dutch postcode. Format should be: 1234AB')) ?>';
                         }
                     }
+
                     return true;
                 });
             }
